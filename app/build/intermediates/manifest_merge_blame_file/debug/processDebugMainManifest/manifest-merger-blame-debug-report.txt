@@ -1,0 +1,126 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="cloud.karpov"
+4    android:versionCode="1"
+5    android:versionName="0.0.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:3:3-64
+11-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:3:20-62
+12
+13    <permission
+13-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+14        android:name="cloud.karpov.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+14-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+15        android:protectionLevel="signature" />
+15-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+16
+17    <uses-permission android:name="cloud.karpov.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+17-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+18
+19    <application
+19-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:4:5-16:17
+20        android:name="cloud.karpov.App"
+20-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:5:9-40
+21        android:allowBackup="true"
+21-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:6:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.12.0] /home/ars/.gradle/caches/8.10.2/transforms/5326ddbce7138e69bfb90b6bd3803132/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+23        android:debuggable="true"
+24        android:extractNativeLibs="false"
+25        android:label="@string/app_name"
+25-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:7:9-41
+26        android:supportsRtl="true" >
+26-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:8:9-35
+27        <activity
+27-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:9:5-15:18
+28            android:name="cloud.karpov.MainActivity"
+28-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:9:15-43
+29            android:exported="true" >
+29-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:10:7-30
+30            <intent-filter>
+30-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:11:9-14:25
+31                <action android:name="android.intent.action.MAIN" />
+31-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:12:11-62
+31-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:12:19-60
+32
+33                <category android:name="android.intent.category.LAUNCHER" />
+33-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:13:11-70
+33-->/home/ars/dev/templates/android/one/app/src/main/AndroidManifest.xml:13:21-68
+34            </intent-filter>
+35        </activity>
+36
+37        <uses-library
+37-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+38            android:name="androidx.window.extensions"
+38-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+39            android:required="false" />
+39-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+40        <uses-library
+40-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+41            android:name="androidx.window.sidecar"
+41-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+42            android:required="false" />
+42-->[androidx.window:window:1.0.0] /home/ars/.gradle/caches/8.10.2/transforms/12e30ef8e7e746d6b4e18735cbca2609/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+43
+44        <provider
+44-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+45            android:name="androidx.startup.InitializationProvider"
+45-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:25:13-67
+46            android:authorities="cloud.karpov.androidx-startup"
+46-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:26:13-68
+47            android:exported="false" >
+47-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:27:13-37
+48            <meta-data
+48-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+49                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+49-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+50                android:value="androidx.startup" />
+50-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+51        </provider>
+52
+53        <receiver
+53-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+54            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+54-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+55            android:directBootAware="false"
+55-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+56            android:enabled="true"
+56-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+57            android:exported="true"
+57-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+58            android:permission="android.permission.DUMP" >
+58-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+59            <intent-filter>
+59-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+60                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+60-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+60-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+61            </intent-filter>
+62            <intent-filter>
+62-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+63                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+63-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+63-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+64            </intent-filter>
+65            <intent-filter>
+65-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+66                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+66-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+66-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+67            </intent-filter>
+68            <intent-filter>
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+69                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/ars/.gradle/caches/8.10.2/transforms/20d75f5b83a2fdc84ca451691e57c0e0/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+70            </intent-filter>
+71        </receiver>
+72    </application>
+73
+74</manifest>

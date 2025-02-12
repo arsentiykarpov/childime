@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "cloud.karpov.app-release-44:/navigation_nav_graph.xml.flat",
+        "source": "cloud.karpov.app-main-45:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "cloud.karpov.app-release-44:/layout_fragment_home.xml.flat",
+        "source": "cloud.karpov.app-main-45:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "cloud.karpov.app-release-44:/layout_activity_main.xml.flat",
+        "source": "cloud.karpov.app-main-45:/layout/activity_main.xml"
+    },
+    {
+        "merged": "cloud.karpov.app-release-44:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "cloud.karpov.app-main-45:/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]
