@@ -20,6 +20,18 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17  // Ensure this matches Kotlin
     targetCompatibility = JavaVersion.VERSION_17
   }
+
+  buildFeatures {
+    compose = true
+  }
+    
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.5.4"
+  }
+
+  kotlinOptions {
+    jvmTarget = "17"
+  }
 }
 
 dependencies {
@@ -30,5 +42,11 @@ dependencies {
   implementation(Dependencies.navFragment)
   implementation(Dependencies.navRuntime)
   implementation(Dependencies.hiltAndroid)
+  implementation(Dependencies.navCompose)
+  implementation(Dependencies.androidxViewModelCompose)
+  implementation(Dependencies.androidxUi)
+  implementation(Dependencies.androidxMaterial)
+  implementation(Dependencies.androidxHiltCompose)
+  implementation("androidx.compose.material3:material3:1.3.1")
   kapt(Dependencies.hiltCompiler)
 }
