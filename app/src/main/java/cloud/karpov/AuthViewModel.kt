@@ -14,13 +14,17 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
+import cloud.karpov.mvi.*
+import cloud.karpov.usecase.LoginUseCase
+import cloud.karpov.usecase.LoginViewState
+import cloud.karpov.usecase.LoginAction
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
-  private val _profile = MutableStateFlow<LoginUiState?>(LoginUiState.Loading)
+class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : MviViewModel<LoginUseCase, LoginViewState, LoginAction>, ViewModel() {
+  private val _profile = MutableStateFlow<LoginViewState>(LoginViewState.Loading)
   val profile = _profile.asStateFlow()
 
-  private val actions = MutableStateFlow<AuthAction?>(null)
+  private val actions = MutableStateFlow<LoginAction>(LoginAction.InitLoginAction())
 
   init {
     viewModelScope.launch {
@@ -39,28 +43,29 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         val result = withContext(Dispatchers.IO) {
           authRepository.login(name, pass)
         }
-        _profile.emit(LoginUiState.Ok(result))
+        _profile.emit(LoginViewState.OK(result))
       } catch (exception: Throwable) {
-        _profile.emit(LoginUiState.Error(GeneralError(exception)))
+        _profile.emit(LoginViewState.Error(GeneralError(exception)))
       }
     }
   }
 
-  fun onAction(action: AuthAction) {
+  fun onAction(action: LoginAction) {
     viewModelScope.launch {
       actions.emit(action);
     }
   }
-}
 
-sealed class LoginUiState {
-  object Loading : LoginUiState()
-  data class Ok(val profile : Profile) : LoginUiState()
-  data class Error(val error: GeneralError) : LoginUiState()
-}
+  override fun bindActions() {
 
-sealed class AuthAction {
-  data class UsernameChanged(var name: String) : AuthAction()
-  data class PassChanged(var pass: String): AuthAction()
-  data class Login(var name: String, var pass: String): AuthAction()
+  }
+
+
+  override fun reduceViewState(partialViewState: LoginViewState): LoginViewState {
+    return partialViewState
+  }
+
+  override fun  sendAction(action: LoginAction) {
+    
+  }
 }
