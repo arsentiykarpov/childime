@@ -48,5 +48,6 @@ dependencies {
   implementation(Dependencies.androidxMaterial)
   implementation(Dependencies.androidxHiltCompose)
   implementation("androidx.compose.material3:material3:1.3.1")
+  implementation(project(":mvi"))
   kapt(Dependencies.hiltCompiler)
 }

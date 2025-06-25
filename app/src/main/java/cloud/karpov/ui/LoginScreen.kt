@@ -41,7 +41,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cloud.karpov.AuthAction
+import cloud.karpov.usecase.LoginAction
 
 @Composable
 fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
@@ -53,18 +53,18 @@ fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
     ) {
         TextField(
             value = "",
-            onValueChange = { viewModel.onAction(AuthAction.UsernameChanged(it)) },
+            onValueChange = { viewModel.onAction(LoginAction.UsernameChanged(it)) },
             label = { Text("Username") }
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
             value = "",
-            onValueChange = { viewModel.onAction(AuthAction.PassChanged(it))},
+            onValueChange = { viewModel.onAction(LoginAction.PassChanged(it))},
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { viewModel.onAction(AuthAction.Login("", "")) }) {
+        Button(onClick = { viewModel.onAction(LoginAction.Login("", "")) }) {
             Text("Login")
         }
     }

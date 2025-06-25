@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Karpov Cloud"
 include(":app")
+include(":mvi")
