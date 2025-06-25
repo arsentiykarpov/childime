@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import cloud.karpov.mvi.*
 import cloud.karpov.usecase.LoginUseCase
 import cloud.karpov.usecase.LoginViewState
@@ -28,11 +29,8 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
 
   init {
     viewModelScope.launch {
-      actions.asStateFlow().flatMapMerge { value ->
-
-        flow {
-          emit(value)
-        }
+      actions.asStateFlow().flatMapLatest { value ->
+        flowOf(value)
       }
    }
   }
@@ -61,11 +59,11 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
   }
 
 
-  override fun reduceViewState(partialViewState: LoginViewState): LoginViewState {
-    return partialViewState
-  }
-
   override fun  sendAction(action: LoginAction) {
     
+  }
+
+  override fun reduceViewState(fullViewState: LoginViewState, partialViewState: LoginViewState): LoginViewState { 
+    return partialViewState
   }
 }
