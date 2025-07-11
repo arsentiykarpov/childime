@@ -10,12 +10,14 @@ import kotlinx.coroutines.flow.Flow
 class AuthModule {
  companion object {
    fun provideAuthRepository(context: Context): AuthRepository {
-     return object : AuthRepository {
-       override suspend fun login(login: String, pass: String): Profile {
-         return Profile(User("name", "pass"))
+       return object: AuthRepository {
+           override fun login(
+               login: String,
+               pass: String
+           ): Profile {
+               return Profile(User(login, "test token"))
+           }
        }
      }
    }
  }
-
-}
