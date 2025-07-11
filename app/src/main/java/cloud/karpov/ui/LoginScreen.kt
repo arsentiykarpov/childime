@@ -36,39 +36,80 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import cloud.karpov.AuthViewModelFactory
 import cloud.karpov.di.AuthModule
 import cloud.karpov.domain.repository.AuthRepository
 import cloud.karpov.usecase.LoginAction
+import cloud.karpov.usecase.LoginViewState
 
 @Composable
-fun LoginScreen(repo: AuthRepository = AuthModule.provideAuthRepository(LocalContext.current)) {
-    val viewModel = viewModel { AuthViewModelFactory(repo).create(AuthViewModel::class.java) }
-    val uiState by viewModel.profile.collectAsState()
+fun LoginScreen(
+    navController: NavController,
+    repo: AuthRepository
+) {
+    val viewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory(repo))
+    val viewState = viewModel.viewState.collectAsState()
+    val state: LoginViewState = viewState.value
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
+    LaunchedEffect(state) {
+        if (state is LoginViewState.OK) {
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true }
+            }
+        }
+    }
+
+    when (state) {
+        is LoginViewState.Loading -> {
+            Text("Loading")
+        }
+
+        is LoginViewState.OK -> {
+        }
+
+        is LoginViewState.Error -> {
+            Text(state.error.error.message!!)
+        }
+    }
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
         TextField(
-            value = "",
-            onValueChange = { viewModel.onAction(LoginAction.UsernameChanged(it)) },
-            label = { Text("Username") }
+            label = { Text("Username") },
+            enabled = true,
+            readOnly = false,
+            onValueChange = { username = it },
+            value = username,
         )
+
         Spacer(modifier = Modifier.height(8.dp))
+
         TextField(
-            value = "",
-            onValueChange = { viewModel.onAction(LoginAction.PassChanged(it))},
             label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation()
+            enabled = true,
+            readOnly = false,
+            value = password,
+            onValueChange = { password = it },
         )
+
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { viewModel.onAction(LoginAction.Login("", "")) }) {
+
+        Button(onClick = {
+            viewModel.login(username, password)
+        }) {
             Text("Login")
         }
     }

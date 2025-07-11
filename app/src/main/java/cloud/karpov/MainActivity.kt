@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import cloud.karpov.di.AuthModule
 import cloud.karpov.domain.repository.AuthRepository
+import cloud.karpov.navigation.AppNavigation
 import cloud.karpov.ui.LoginScreen
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      LoginScreen()
+      AppNavigation()
     }
   }
 
