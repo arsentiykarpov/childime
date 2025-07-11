@@ -1,12 +1,13 @@
 package cloud.karpov
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import java.lang.ref.WeakReference
 
-@HiltAndroidApp
+public var appContext = WeakReference<App?>(null)
 class App : Application() {
 
   override fun onCreate() {
     super.onCreate()
+    appContext = WeakReference(this)
   }
 }

@@ -39,12 +39,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import cloud.karpov.AuthViewModelFactory
+import cloud.karpov.di.AuthModule
+import cloud.karpov.domain.repository.AuthRepository
 import cloud.karpov.usecase.LoginAction
 
 @Composable
-fun LoginScreen(viewModel: AuthViewModel = hiltViewModel()) {
+fun LoginScreen(repo: AuthRepository = AuthModule.provideAuthRepository(LocalContext.current)) {
+    val viewModel = viewModel { AuthViewModelFactory(repo).create(AuthViewModel::class.java) }
     val uiState by viewModel.profile.collectAsState()
 
     Column(

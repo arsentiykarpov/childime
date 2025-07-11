@@ -1,12 +1,15 @@
-plugins {
-  kotlin("android") version "1.9.20" apply false
-  kotlin("kapt") version "1.9.20" apply false
-  id("com.android.library") version "8.7.0" apply false
-  id("com.android.application") version "8.7.0" apply false
-  id("com.google.dagger.hilt.android") version "2.48" apply false
-}
-
-
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+plugins {
+  alias(libs.plugins.agp.application) apply false
+  alias(libs.plugins.agp.library) apply false
+  alias(libs.plugins.agp.test) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.kotlin.jvm) apply false
+  alias(libs.plugins.kotlin.serialization) apply false
+  alias(libs.plugins.kotlinx.kover) apply false
+  alias(libs.plugins.kotlin.plugin.compose)
+  alias(libs.plugins.ksp) apply false
+  alias(libs.plugins.mikepenz.aboutlibraries) apply false
 }

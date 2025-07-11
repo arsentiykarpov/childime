@@ -2,10 +2,11 @@
         "DSL_SCOPE_VIOLATION"
 ) 
 plugins {
-  kotlin("android")
-  kotlin("kapt")
-  id("com.android.library")
-  id("com.google.dagger.hilt.android")
+  alias(libs.plugins.agp.library)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.ksp)
+  alias(libs.plugins.mikepenz.aboutlibraries)
 }
 
 android {
@@ -13,7 +14,7 @@ android {
   compileSdk = 35
 
   defaultConfig {
-    minSdk = 21
+    minSdk = 26
 
   }
 
@@ -34,10 +35,7 @@ android {
 }
 
 dependencies {
-  implementation(Dependencies.kotlinStdLib)
-  implementation(Dependencies.lifecycleViewModel)
-  implementation(Dependencies.androidCoreKtx)
-  implementation(Dependencies.hiltAndroid)
-  implementation("androidx.compose.material3:material3:1.3.1")
-  kapt(Dependencies.hiltCompiler)
+  implementation(libs.kotlin.stdlib)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.androidx.core.ktx)
 }
