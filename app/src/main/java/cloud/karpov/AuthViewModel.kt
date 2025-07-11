@@ -1,10 +1,9 @@
 package cloud.karpov
 
-import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import cloud.karpov.data.GeneralError
-import javax.inject.Inject
 import cloud.karpov.domain.repository.AuthRepository
 import cloud.karpov.data.Profile
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,8 +19,7 @@ import cloud.karpov.usecase.LoginUseCase
 import cloud.karpov.usecase.LoginViewState
 import cloud.karpov.usecase.LoginAction
 
-@HiltViewModel
-class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : MviViewModel<LoginUseCase, LoginViewState, LoginAction>, ViewModel() {
+class AuthViewModel  constructor(private val authRepository: AuthRepository) : MviViewModel<LoginUseCase, LoginViewState, LoginAction>, ViewModel() {
   private val _profile = MutableStateFlow<LoginViewState>(LoginViewState.Loading)
   val profile = _profile.asStateFlow()
 
@@ -65,5 +63,14 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
 
   override fun reduceViewState(fullViewState: LoginViewState, partialViewState: LoginViewState): LoginViewState { 
     return partialViewState
+  }
+}
+
+class AuthViewModelFactory(private val repo: AuthRepository) : ViewModelProvider.Factory {
+  override fun <T : ViewModel> create(modelClass: Class<T>): T {
+    if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
+      return AuthViewModel(repo) as T
+    }
+    throw IllegalArgumentException("Unknown ViewModel class")
   }
 }

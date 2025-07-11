@@ -1,1 +1,0 @@
-/home/ars/dev/templates/android/one/buildSrc/build/classes/kotlin/main/Dependencies.class:/home/ars/dev/templates/android/one/buildSrc/build/classes/kotlin/main/Plugins.class:/home/ars/dev/templates/android/one/buildSrc/build/classes/kotlin/main/Versions.class

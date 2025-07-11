@@ -15,5 +15,24 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Karpov Cloud"
+
 include(":app")
 include(":mvi")
+
+// Include FlorisBoard modules
+include(":florisboard")
+include(":florisboard:app")
+include(":florisboard:android")
+include(":florisboard:color")
+include(":florisboard:kotlin")
+include(":florisboard:native")
+include(":florisboard:snygg")
+
+// Map project directories
+project(":florisboard").projectDir = file("florisboard")
+project(":florisboard:android").projectDir = file("florisboard/app")
+project(":florisboard:android").projectDir = file("florisboard/lib/android")
+project(":florisboard:color").projectDir = file("florisboard/lib/color")
+project(":florisboard:kotlin").projectDir = file("florisboard/lib/kotlin")
+project(":florisboard:native").projectDir = file("florisboard/lib/native")
+project(":florisboard:snygg").projectDir = file("florisboard/lib/snygg")
