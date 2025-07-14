@@ -13,7 +13,7 @@ import cloud.karpov.ui.HomeScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = "login") {
+    NavHost(navController, startDestination = "home") {
         composable("login") {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
