@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cloud.karpov.di.AuthModule
+import cloud.karpov.keyboardApp
 import cloud.karpov.ui.LoginScreen
 import cloud.karpov.ui.HomeScreen
 
@@ -18,7 +19,7 @@ fun AppNavigation() {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
         composable("home") {
-            HomeScreen()
+            HomeScreen(keyboardApp.get()!!.editorInstance.value)
         }
     }
 }
