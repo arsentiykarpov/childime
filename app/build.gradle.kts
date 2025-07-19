@@ -71,6 +71,7 @@ dependencies {
   // Internal modules
   implementation(project(":mvi"))
   implementation(project(":florisboard:app"))
+  implementation(project(":interop"))
   implementation(libs.patrickgold.jetpref.datastore.model)
   implementation(libs.patrickgold.jetpref.material.ui)
   implementation(libs.cache4k)

@@ -18,7 +18,7 @@ rootProject.name = "Karpov Cloud"
 
 include(":app")
 include(":mvi")
-
+include(":interop")
 // Include FlorisBoard modules
 include(":florisboard")
 include(":florisboard:app")
@@ -36,3 +36,4 @@ project(":florisboard:color").projectDir = file("florisboard/lib/color")
 project(":florisboard:kotlin").projectDir = file("florisboard/lib/kotlin")
 project(":florisboard:native").projectDir = file("florisboard/lib/native")
 project(":florisboard:snygg").projectDir = file("florisboard/lib/snygg")
+project(":interop").projectDir = file("interop")
