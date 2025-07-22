@@ -1,11 +1,9 @@
-package cloud.karpov.di
+package cloud.karpov.auth.di
 
 import android.content.Context
-import cloud.karpov.domain.repository.AuthRepository
-import cloud.karpov.data.User
-import cloud.karpov.data.Profile
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.Flow
+import cloud.karpov.auth.data.Profile
+import cloud.karpov.auth.data.User
+import cloud.karpov.auth.repository.AuthRepository
 
 class AuthModule {
  companion object {

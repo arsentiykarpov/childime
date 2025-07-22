@@ -1,28 +1,18 @@
-package cloud.karpov
+package cloud.karpov.home.viewmodel
+
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import cloud.karpov.data.GeneralError
-import cloud.karpov.domain.repository.AuthRepository
-import cloud.karpov.data.Profile
-import cloud.karpov.data.User
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import cloud.karpov.mvi.*
-import cloud.karpov.usecase.InitialUseCase
-import cloud.karpov.usecase.LoginUseCase
-import cloud.karpov.usecase.LoginViewState
-import cloud.karpov.usecase.LoginAction
-import kotlinx.coroutines.flow.map
+import cloud.karpov.auth.repository.AuthRepository
+import cloud.karpov.auth.usecase.InitialUseCase
+import cloud.karpov.auth.usecase.LoginAction
+import cloud.karpov.auth.usecase.LoginUseCase
+import cloud.karpov.auth.usecase.LoginViewState
+import cloud.karpov.auth.viewmodel.AuthViewModel
+import cloud.karpov.mvi.BaseViewModel
+import cloud.karpov.mvi.MviUseCase
 
-class AuthViewModel constructor(private val authRepository: AuthRepository) :
+class MainViewModel constructor(private val authRepository: AuthRepository) :
     BaseViewModel<MviUseCase<LoginAction, LoginViewState>, LoginViewState, LoginAction>() {
 
     init {

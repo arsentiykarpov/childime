@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="cloud.karpov.HomeFragment"
+        android:name="cloud.karpov.home.ui.HomeFragment"
         android:label="Home" />
 </navigation>

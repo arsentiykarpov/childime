@@ -1,11 +1,11 @@
-package cloud.karpov.usecase
+package cloud.karpov.auth.usecase
 
-import cloud.karpov.mvi.MviUseCase
+import cloud.karpov.auth.data.GeneralError
+import cloud.karpov.auth.data.Profile
+import cloud.karpov.auth.repository.AuthRepository
 import cloud.karpov.mvi.MviAction
+import cloud.karpov.mvi.MviUseCase
 import cloud.karpov.mvi.MviViewState
-import cloud.karpov.data.Profile
-import cloud.karpov.data.GeneralError
-import cloud.karpov.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

@@ -1,8 +1,6 @@
 package cloud.karpov
 
 import android.app.Application
-import androidx.compose.runtime.key
-import cloud.karpov.boundary.ApplicationInterop
 import dev.patrickgold.florisboard.FlorisApplication
 import dev.patrickgold.florisboard.florisApplication
 import java.lang.ref.WeakReference
@@ -10,7 +8,7 @@ import java.lang.ref.WeakReference
 public var appContext = WeakReference<App?>(null)
 public var keyboardApp = WeakReference<FlorisApplication?>(null)
 
-class App : Application(), ApplicationInterop<FlorisApplication> {
+class App : Application(){
 
     var florisApp: FlorisApplication? = null
     override fun onCreate() {
@@ -18,10 +16,6 @@ class App : Application(), ApplicationInterop<FlorisApplication> {
         appContext = WeakReference(this)
         florisApp = this.florisApplication()
         keyboardApp = WeakReference<FlorisApplication?>(florisApp)
-    }
-
-    override fun application(): FlorisApplication {
-        return florisApp!!
     }
 
 }
