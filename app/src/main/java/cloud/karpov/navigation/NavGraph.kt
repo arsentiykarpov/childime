@@ -2,14 +2,13 @@ package cloud.karpov.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import cloud.karpov.di.AuthModule
+import cloud.karpov.auth.di.AuthModule
 import cloud.karpov.keyboardApp
-import cloud.karpov.ui.LoginScreen
-import cloud.karpov.ui.HomeScreen
+import cloud.karpov.auth.ui.LoginScreen
+import cloud.karpov.home.ui.HomeScreen
 
 @Composable
 fun AppNavigation() {
