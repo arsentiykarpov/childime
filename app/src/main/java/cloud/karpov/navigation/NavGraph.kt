@@ -5,10 +5,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import cloud.karpov.ai.di.AiModule
 import cloud.karpov.auth.di.AuthModule
-import cloud.karpov.keyboardApp
 import cloud.karpov.auth.ui.LoginScreen
 import cloud.karpov.home.ui.HomeScreen
+import cloud.karpov.keyboardApp
 
 @Composable
 fun AppNavigation() {
@@ -18,7 +19,7 @@ fun AppNavigation() {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
         composable("home") {
-            HomeScreen(keyboardApp.get()!!.editorInstance.value)
+            HomeScreen(keyboardApp.get()!!.editorInstance.value, navController, AiModule.provideAiRepository(LocalContext.current))
         }
     }
 }

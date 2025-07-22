@@ -1,24 +1,18 @@
 package cloud.karpov.mvi
 
-import kotlinx.coroutines.flow.combine
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.scan
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.scan
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 import kotlin.reflect.KClass
 
 abstract class BaseViewModel<USECASE : MviUseCase<ACTION, VIEWSTATE>, VIEWSTATE : MviViewState, ACTION : MviAction> :
@@ -29,8 +23,7 @@ abstract class BaseViewModel<USECASE : MviUseCase<ACTION, VIEWSTATE>, VIEWSTATE 
     protected val partialViewStates: Flow<VIEWSTATE> = _partialViewStates
     private val lazyInit by lazy {
         viewModelScope.launch {
-            withContext(
-                Dispatchers.IO,
+            withContext(Dispatchers.IO)
                 {
                     actions = MutableStateFlow<ACTION>(getInititalAction())
                     bindActions()
@@ -38,9 +31,9 @@ abstract class BaseViewModel<USECASE : MviUseCase<ACTION, VIEWSTATE>, VIEWSTATE 
                         val usecase =
                             requireNotNull(actionToUsecaseMapping[action::class]) { "Usecase must not be null" }
                         usecase(action)
-                    }.collect { vs -> _partialViewStates.emit(vs as VIEWSTATE) }
+                    }.collect {
+                        vs -> _partialViewStates.emit(vs as VIEWSTATE) }
                 }
-            )
         }
     }
 
