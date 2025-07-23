@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
-private const val BASE_URL = "http://localhost:8000/"
+private const val BASE_URL = "http://10.0.2.2:8000/"
 
 class RestClient {
     lateinit var retrofitClient: Retrofit
@@ -28,6 +28,7 @@ class RestClient {
 
     constructor() {
         this.retrofitClient = Retrofit.Builder()
+            .client(client)
             .baseUrl(BASE_URL)
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()

@@ -1,6 +1,6 @@
 package cloud.karpov.home.usecase
 
-import cloud.karpov.ai.data.Prediction
+import cloud.karpov.ai.data.PredictionResponse
 import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.auth.data.GeneralError
 import cloud.karpov.mvi.MviAction
@@ -46,6 +46,6 @@ sealed class HomeAction : MviAction {
 
 sealed class HomeViewState : MviViewState {
     object Loading : HomeViewState()
-    data class OK(var predict: Prediction) : HomeViewState()
+    data class OK(var predict: PredictionResponse) : HomeViewState()
     data class Error(var error: GeneralError) : HomeViewState()
 }
