@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cloud.karpov.ai.repository.AiRepository
@@ -26,11 +27,13 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun HomeScreen(editorInstance: AbstractEditorInstance,
+fun HomeScreen(
+    editorInstance: AbstractEditorInstance,
     navController: NavController,
     repo: AiRepository
 ) {
-    val viewModel: HomeViewModel = viewModel(factory = HomeViewModelFactory(repo))
+    val viewModel: HomeViewModel =
+        viewModel(factory = HomeViewModelFactory(repo, LocalContext.current))
     val viewState = viewModel.viewState.collectAsState()
     val state: HomeViewState = viewState.value
     var input by remember { mutableStateOf("") }
@@ -50,29 +53,36 @@ fun HomeScreen(editorInstance: AbstractEditorInstance,
         }
 
         is HomeViewState.OK -> {
-            Text(state.predict.toString())
-            output = state.predict.toString()
+            Text("OK")
+            val compiledOutput =
+                state.predict.prediction.map { return@map it.ru + " score: " + it.score.toString() }
+                    .joinToString(separator = ";")
+            output = compiledOutput
         }
 
         is HomeViewState.Error -> {
             Text(state.error.error.message!!)
         }
+
+        is HomeViewState.DebugViewState -> {
+            output = state.input
+        }
     }
 
     val content = editorInstance.activeContentFlow.collectAsState()
     MainScope().launch {
-    content.apply {
-      output = this.value.text
-    }
+        content.apply {
+            output = this.value.text
+        }
     }
     Column(
         Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     )
     {
         TextField(
             value = input,
-            onValueChange = { viewModel.predict(input) },
+            onValueChange = { input = it; viewModel.predict(input) },
             enabled = true,
             readOnly = false,
             label = { Text("Ввод") })
@@ -80,6 +90,7 @@ fun HomeScreen(editorInstance: AbstractEditorInstance,
         TextField(
             value = output,
             onValueChange = { output = it },
+            minLines = 20,
             enabled = true,
             readOnly = false,
             label = { Text("Backend answer") })
