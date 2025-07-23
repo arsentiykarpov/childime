@@ -28,10 +28,17 @@ open class PredictUseCase(private val repository: AiRepository) :
             is HomeAction.InitHomeAction -> {
                 flowOf()
             }
+
+            else -> {flowOf()}
         }
     }
 }
 
+class UserInputlUseCase : MviUseCase<HomeAction, HomeViewState> {
+    override fun invoke(action: HomeAction): Flow<HomeViewState> {
+        return flowOf(HomeViewState.DebugViewState((action as HomeAction.UserInputAction).input))
+    }
+}
 
 class InitialUseCase : MviUseCase<HomeAction, HomeViewState> {
     override fun invoke(action: HomeAction): Flow<HomeViewState> {
@@ -42,10 +49,13 @@ class InitialUseCase : MviUseCase<HomeAction, HomeViewState> {
 sealed class HomeAction : MviAction {
     class InitHomeAction : HomeAction()
     data class Predict(var input: List<String>) : HomeAction()
+    data class UserInputAction(val input: String): HomeAction()
 }
 
 sealed class HomeViewState : MviViewState {
     object Loading : HomeViewState()
     data class OK(var predict: PredictionResponse) : HomeViewState()
     data class Error(var error: GeneralError) : HomeViewState()
+
+    data class DebugViewState(var  input: String): HomeViewState()
 }
