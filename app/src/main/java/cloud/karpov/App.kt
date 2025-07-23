@@ -6,6 +6,7 @@ import dev.patrickgold.florisboard.FlorisApplication
 import dev.patrickgold.florisboard.florisApplication
 import java.lang.ref.WeakReference
 
+
 public var appContext = WeakReference<App?>(null)
 public var keyboardApp = WeakReference<FlorisApplication?>(null)
 public var restClient = WeakReference<RestClient?>(null)

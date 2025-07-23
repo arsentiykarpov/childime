@@ -1,8 +1,8 @@
 package cloud.karpov.ai.repository
 
-import cloud.karpov.ai.data.Prediction
+import cloud.karpov.ai.data.PredictionResponse
 
 
 interface AiRepository {
-   suspend fun checkHarm(inputList: List<String>): Prediction
+   suspend fun checkHarm(inputList: List<String>): PredictionResponse
 }

@@ -37,11 +37,11 @@ fun HomeScreen(editorInstance: AbstractEditorInstance,
     var output by remember { mutableStateOf("") }
 
     LaunchedEffect(state) {
-        if (state is HomeViewState.OK) {
-            navController.navigate("home") {
-                popUpTo("login") { inclusive = true }
-            }
-        }
+//        if (state is HomeViewState.OK) {
+//            navController.navigate("home") {
+//                popUpTo("login") { inclusive = true }
+//            }
+//        }
     }
 
     when (state) {
