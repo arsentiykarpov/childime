@@ -32,6 +32,7 @@ android {
     buildFeatures {
         buildConfig = true
         compose = true
+        viewBinding = true
     }
 
     composeOptions {
@@ -67,7 +68,7 @@ dependencies {
 
     // Optional Material3 (already covered in BOM, but explicit fallback)
     implementation(libs.androidx.compose.material3)
-
+    implementation(libs.androidx.compose.foundation)
     // Internal modules
     implementation(project(":mvi"))
     implementation(project(":florisboard:app"))
@@ -82,6 +83,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlinx.converter)
     implementation(libs.retrofit.logging)
+
+    //Adapt (recycler view library)
+    implementation(libs.adapt)
 }
 
 fun getGitCommitHash(short: Boolean = false): String {
