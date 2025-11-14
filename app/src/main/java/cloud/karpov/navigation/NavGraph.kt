@@ -14,7 +14,7 @@ import cloud.karpov.keyboardApp
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = "home") {
+    NavHost(navController, startDestination = "login") {
         composable("login") {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
