@@ -34,7 +34,7 @@ open class PredictUseCase(private val repository: AiRepository) :
     }
 }
 
-class UserInputlUseCase : MviUseCase<HomeAction, HomeViewState> {
+class UserInputUseCase : MviUseCase<HomeAction, HomeViewState> {
     override fun invoke(action: HomeAction): Flow<HomeViewState> {
         return flowOf(HomeViewState.DebugViewState((action as HomeAction.UserInputAction).input))
     }

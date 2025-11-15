@@ -19,7 +19,7 @@ fun AppNavigation() {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
         composable("home") {
-            HomeScreen(keyboardApp.get()!!.editorInstance.value, navController, AiModule.provideAiRepository(LocalContext.current))
+            HomeScreen(keyboardApp.get()!!.editorInstance.value, navController, AiModule.provideAiRepositoryTest(LocalContext.current))
         }
     }
 }

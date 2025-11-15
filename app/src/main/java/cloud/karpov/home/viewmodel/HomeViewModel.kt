@@ -10,7 +10,7 @@ import cloud.karpov.home.usecase.HomeAction
 import cloud.karpov.home.usecase.HomeViewState
 import cloud.karpov.home.usecase.InitialUseCase
 import cloud.karpov.home.usecase.PredictUseCase
-import cloud.karpov.home.usecase.UserInputlUseCase
+import cloud.karpov.home.usecase.UserInputUseCase
 import cloud.karpov.mvi.BaseViewModel
 import cloud.karpov.mvi.MviUseCase
 import dev.patrickgold.florisboard.editorInstance
@@ -46,11 +46,16 @@ class HomeViewModel constructor(private val aiRepository: AiRepository, val cont
         )
     }
 
+    fun sendTestData() {
+      predict("test dummy")
+    }
+
     override fun bindActions() {
         bindAction(HomeAction.InitHomeAction::class, InitialUseCase())
         bindAction(HomeAction.Predict::class, PredictUseCase(aiRepository))
-        bindAction(HomeAction.UserInputAction::class, UserInputlUseCase())
+        bindAction(HomeAction.UserInputAction::class, UserInputUseCase())
         observerUserInput()
+        sendTestData()
     }
 
     override fun getInitialViewState(): HomeViewState {
