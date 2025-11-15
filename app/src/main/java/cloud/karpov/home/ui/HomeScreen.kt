@@ -6,18 +6,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChatBubble
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import cloud.karpov.ai.data.Prediction
 import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.home.usecase.HomeViewState
 import cloud.karpov.home.viewmodel.HomeViewModel
@@ -55,8 +55,15 @@ fun HomeScreen(
     var input by remember { mutableStateOf("") }
     var output by remember { mutableStateOf("") }
 
+    val content = editorInstance.activeContentFlow.collectAsState()
+    MainScope().launch {
+        content.apply {
+            output = this.value.text
+        }
+    }
+    
     @Composable
-    fun NormmalChatEntryView(
+    fun NormalChatEntryView(
         icon: ImageVector,
         score: Float,
         title: String,
@@ -69,7 +76,6 @@ fun HomeScreen(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Icon on the left
             Box(
                 modifier = Modifier
                     .size(20.dp)
@@ -77,14 +83,8 @@ fun HomeScreen(
                     .background(Color.Red),
                 contentAlignment = Alignment.Center
             ) {
-              //  ext(
-              //      text = score.toString(),
-              //      color = textColor,
-              //      style = MaterialTheme.typography.bodyMedium,
-              //  )
             }
 
-            // Title and subtitle stacked vertically
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.weight(1f)
@@ -107,39 +107,16 @@ fun HomeScreen(
     }
 
     @Composable
-    fun ChatList(entires: List<ChatEntry>) {
+    fun ChatList(entires: List<Prediction>) {
         LazyColumn {
-            items(entires) { message ->
-                if (message.prediction.score < 0.8) {
-//                    NormmalChatEntryView()
-                }
+            items(entires) { prediction ->
+                val icon = Icons.Filled.ChatBubble
+                val score = prediction.score
+                val title = prediction.ru
+                val subtitle = prediction.harmful.toString()
+                NormalChatEntryView(icon, score, title, subtitle)
             }
         }
-    }
-
- //   @Composable
- //   fun createAdapter(): AdaptAdapter<ChatEntry> {
- //       val context = LocalContext.current
- //       val rootView = LocalView.current as ViewGroup
- //       return adapt<ChatEntry> {
- //           create {
- //               val chatEntryView =
- //                   ComposableItemBinding.inflate(LayoutInflater.from(context), it, false)
- //               ViewSource.BindingViewSource(
- //                   chatEntryView,
- //                   ViewBinding::getRoot
- //               )
- //           }.bind {
- //               binding.composeView.
- //           }
- //       }
- //   }
-    LaunchedEffect(state) {
-//        if (state is HomeViewState.OK) {
-//            navController.navigate("home") {
-//                popUpTo("login") { inclusive = true }
-//            }
-//        }
     }
 
     when (state) {
@@ -148,11 +125,7 @@ fun HomeScreen(
         }
 
         is HomeViewState.OK -> {
-            Text("OK")
-            val compiledOutput =
-                state.predict.prediction.map { return@map it.ru + " score: " + it.score.toString() }
-                    .joinToString(separator = ";")
-            output = compiledOutput
+            ChatList(state.predict.prediction)
         }
 
         is HomeViewState.Error -> {
@@ -162,33 +135,6 @@ fun HomeScreen(
         is HomeViewState.DebugViewState -> {
             output = state.input
         }
-    }
-
-    val content = editorInstance.activeContentFlow.collectAsState()
-    MainScope().launch {
-        content.apply {
-            output = this.value.text
-        }
-    }
-    Column(
-        Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top
-    )
-    {
-        TextField(
-            value = input,
-            onValueChange = { input = it; viewModel.predict(input) },
-            enabled = true,
-            readOnly = false,
-            label = { Text("Ввод") })
-
-        TextField(
-            value = output,
-            onValueChange = { output = it },
-            minLines = 20,
-            enabled = true,
-            readOnly = false,
-            label = { Text("Backend answer") })
     }
 }
 
