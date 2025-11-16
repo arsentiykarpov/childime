@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
     setContent {
         AppNavigation()
     }
-    startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
-    val imeManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-    imeManager.showInputMethodPicker()
+    //startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
+    //val imeManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+    //imeManager.showInputMethodPicker()
   }
 
 }
