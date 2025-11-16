@@ -68,21 +68,22 @@ fun HomeScreen(
         score: Float,
         title: String,
         subtitle: String,
-        modifier: Modifier = Modifier
+        modifier: Modifier = Modifier.padding(20.dp)
     ) {
         Row(
             modifier = modifier
-                .fillMaxWidth()
-                .padding(12.dp),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
+                    .padding(10.dp)
                     .size(20.dp)
                     .clip(CircleShape)
-                    .background(Color.Red),
+                    .background(Color.DarkGray),
                 contentAlignment = Alignment.Center
             ) {
+              
             }
 
             Column(

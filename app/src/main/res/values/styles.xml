@@ -1,14 +1,21 @@
 <resources>
-    <!-- Base theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">#6200EE</item>
-        <item name="colorPrimaryVariant">#3700B3</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorSecondary">#03DAC5</item>
+        <item name="colorPrimary">#F2E8D5</item>
+        <item name="colorPrimaryVariant">#DFD4C1</item>
+        <item name="colorOnPrimary">#3C3528</item>
+
+        <item name="colorSecondary">#B7A690</item>
+        <item name="colorOnSecondary">#3C3528</item>
+
+        <item name="android:colorBackground">#F7F1E6</item>
+        <item name="colorSurface">#EEE6D8</item>
+        <item name="colorOnSurface">#3C3528</item>
+
+        <item name="colorError">#A06A5A</item>
     </style>
 
-    <!-- Custom theme for Activity -->
     <style name="MainActivityTheme" parent="AppTheme">
-        <item name="android:windowBackground">#FFEB3B</item>
+        <item name="android:windowBackground">#F7F1E6</item>
     </style>
 </resources>
+
