@@ -10,6 +10,7 @@ import cloud.karpov.auth.di.AuthModule
 import cloud.karpov.auth.ui.LoginScreen
 import cloud.karpov.home.ui.HomeScreen
 import cloud.karpov.keyboardApp
+import cloud.karpov.details.ui.DetailsScreen
 
 @Composable
 fun AppNavigation() {
@@ -19,7 +20,8 @@ fun AppNavigation() {
             LoginScreen(navController, AuthModule.provideAuthRepository(LocalContext.current))
         }
         composable("home") {
-            HomeScreen(keyboardApp.get()!!.editorInstance.value, navController, AiModule.provideAiRepositoryTest(LocalContext.current))
+          DetailsScreen(navController, AiModule.provideAiRepositoryTest(LocalContext.current))
+            //HomeScreen(keyboardApp.get()!!.editorInstance.value, navController, AiModule.provideAiRepositoryTest(LocalContext.current))
         }
     }
 }
