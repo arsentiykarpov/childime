@@ -48,6 +48,7 @@ import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.details.usecase.DetailsViewState
 import cloud.karpov.details.viewmodel.DetailsViewModel
 import cloud.karpov.details.viewmodel.DetailsViewModelFactory
+import cloud.karpov.details.ui.ChatMessage
 
 
 enum class RiskLevel {
@@ -66,22 +67,23 @@ data class ChatMessage(
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun DetailsScreen(
-    navController: NavController, repo: AiRepository
+    id: String,
+    navController: NavController,
+    repo: AiRepository
 ) {
-
-
     val viewModel: DetailsViewModel =
         viewModel(factory = DetailsViewModelFactory(repo, LocalContext.current))
     val viewState = viewModel.viewState.collectAsState()
     val state: DetailsViewState = viewState.value
 
-    BullyingContextScreen("dummyId", listOf(), RiskLevel.MEDIUM, 89, {}, {}, {}, {})
 
     when (state) {
         is DetailsViewState.Loading -> {
         }
 
         is DetailsViewState.OK -> {
+          val prediction = viewModel.findPrediction(id)
+          BullyingContextScreen("dummyId", listOf(ChatMessage("", "", prediction.ru, "", true)), RiskLevel.MEDIUM, 89, {}, {}, {}, {})
         }
 
         is DetailsViewState.Error -> {
@@ -105,7 +107,8 @@ fun BullyingContextScreen(
     onShowMoreContext: () -> Unit
 ) {
     val flaggedIndex = remember(messages, flaggedMessageId) {
-        messages.indexOfFirst { it.id == flaggedMessageId }
+     0 
+     //   messages.indexOfFirst { it.id == flaggedMessageId }
     }
 
     Scaffold(topBar = {
