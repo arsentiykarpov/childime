@@ -29,7 +29,7 @@ class DetailsViewModel constructor(private val aiRepository: AiRepository, val c
     }
 
     override fun getInitialViewState(): DetailsViewState {
-        return DetailsViewState.Loading
+        return DetailsViewState.OK("")
     }
 
     override fun getInititalAction(): DetailsAction {

@@ -82,6 +82,7 @@ fun DetailsScreen(
         }
 
         is DetailsViewState.OK -> {
+          Text("OK")
           val prediction = viewModel.findPrediction(id)
           BullyingContextScreen("dummyId", listOf(ChatMessage("", "", prediction.ru, "", true)), RiskLevel.MEDIUM, 89, {}, {}, {}, {})
         }
