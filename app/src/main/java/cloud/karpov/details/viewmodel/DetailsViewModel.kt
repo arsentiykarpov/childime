@@ -3,6 +3,7 @@ package cloud.karpov.details.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import cloud.karpov.ai.data.Messages
 import cloud.karpov.ai.data.Prediction
 import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.details.usecase.DetailsAction
@@ -24,6 +25,9 @@ class DetailsViewModel constructor(private val aiRepository: AiRepository, val c
         }.first()
     }
 
+    fun surroundMessages(count: Int): Messages {
+      return aiRepository.surroundMessages(count)
+    }
     override fun bindActions() {
         bindAction(DetailsAction.InitDetailsAction::class, InitialUseCase())
     }

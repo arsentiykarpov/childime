@@ -1,8 +1,12 @@
 package cloud.karpov.ai.di
 
+import android.app.Application
 import android.content.Context
+import androidx.annotation.RawRes
+import cloud.karpov.R
 import cloud.karpov.ai.data.CheckHarmRequest
 import cloud.karpov.ai.data.Data
+import cloud.karpov.ai.data.Messages
 import cloud.karpov.ai.data.PredictionResponse
 import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.appContext
@@ -50,6 +54,7 @@ class AiModule {
                 "    }\n" +
                 "  ]\n" +
                 "}"
+        
 
         fun provideAiRepository(context: Context): AiRepository {
             return object : AiRepository {
@@ -63,11 +68,15 @@ class AiModule {
                 override fun lastPrediction(): PredictionResponse {
                     return lastPrediction!!
                 }
+
+                override fun surroundMessages(count: Int): Messages {
+                    TODO("Not yet implemented")
+                }
             }
         }
 
-        val testRepo: AiRepository by lazy {
-            return@lazy object : AiRepository {
+        fun testRepo(app: Application): AiRepository {
+              return object : AiRepository {
                 override suspend fun checkHarm(inputList: List<String>): PredictionResponse {
                     return Json.decodeFromString(testPrediction)
                 }
@@ -75,11 +84,22 @@ class AiModule {
                 override fun lastPrediction(): PredictionResponse {
                     return Json.decodeFromString(testPrediction)
                 }
+
+                override fun surroundMessages(count: Int): Messages {
+                    return Json.decodeFromString(app.readRawJson(R.raw.testsurrounding))
+                }
             }
         }
 
+        lateinit var testRepo: AiRepository
+
         fun provideAiRepositoryTest(context: Context): AiRepository {
+            testRepo = testRepo(context as Application)
             return testRepo
         }
     }
 }
+
+fun Application.readRawJson(@RawRes id: Int): String =
+    resources.openRawResource(id).bufferedReader().use { it.readText() }
+

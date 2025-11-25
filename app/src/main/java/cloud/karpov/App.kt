@@ -11,7 +11,7 @@ public var appContext = WeakReference<App?>(null)
 public var keyboardApp = WeakReference<FlorisApplication?>(null)
 public var restClient = WeakReference<RestClient?>(null)
 
-class App : Application(){
+class App : Application() {
 
     var florisApp: FlorisApplication? = null
     override fun onCreate() {
@@ -26,7 +26,7 @@ class App : Application(){
         if (restClient.get() == null) {
             restClient = WeakReference<RestClient?>(RestClient())
         }
-      return restClient.get()!!
+        return restClient.get()!!
     }
 
 }

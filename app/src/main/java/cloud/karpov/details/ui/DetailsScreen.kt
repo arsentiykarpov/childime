@@ -48,7 +48,6 @@ import cloud.karpov.ai.repository.AiRepository
 import cloud.karpov.details.usecase.DetailsViewState
 import cloud.karpov.details.viewmodel.DetailsViewModel
 import cloud.karpov.details.viewmodel.DetailsViewModelFactory
-import cloud.karpov.details.ui.ChatMessage
 
 
 enum class RiskLevel {
@@ -84,7 +83,12 @@ fun DetailsScreen(
         is DetailsViewState.OK -> {
           Text("OK")
           val prediction = viewModel.findPrediction(id)
-          BullyingContextScreen("dummyId", listOf(ChatMessage("", "", prediction.ru, "", true)), RiskLevel.MEDIUM, 89, {}, {}, {}, {})
+          val flaggedMessage = ChatMessage(id, "", prediction.ru, "", true)
+          val surroundMessages: List<ChatMessage> = viewModel.surroundMessages(3).messages.map { it ->
+            ChatMessage(it.id, "", it.content, "", true)
+          }
+          val allMessages = listOf<ChatMessage>(flaggedMessage) + surroundMessages
+          BullyingContextScreen("dummyId", allMessages, RiskLevel.MEDIUM, 89, {}, {}, {}, {})
         }
 
         is DetailsViewState.Error -> {
@@ -108,8 +112,7 @@ fun BullyingContextScreen(
     onShowMoreContext: () -> Unit
 ) {
     val flaggedIndex = remember(messages, flaggedMessageId) {
-     0 
-     //   messages.indexOfFirst { it.id == flaggedMessageId }
+      messages.indexOfFirst { it.id == flaggedMessageId }
     }
 
     Scaffold(topBar = {
