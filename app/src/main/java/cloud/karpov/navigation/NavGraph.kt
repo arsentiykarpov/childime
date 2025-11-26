@@ -21,7 +21,7 @@ fun AppNavigation() {
     val context = LocalContext.current
 
     val aiRepo = remember {
-        AiModule.provideAiRepositoryTest(context)
+        AiModule.provideAiRepositoryTest(context.applicationContext)
     }
     val authRepo = remember {
         AuthModule.provideAuthRepository(context)

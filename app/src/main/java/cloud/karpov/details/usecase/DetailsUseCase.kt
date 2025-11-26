@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flowOf
 
 class InitialUseCase : MviUseCase<DetailsAction, DetailsViewState> {
     override fun invoke(action: DetailsAction): Flow<DetailsViewState> {
-        return flowOf(DetailsViewState.Loading)
+        return flowOf(DetailsViewState.OK(""))
     }
 }
 

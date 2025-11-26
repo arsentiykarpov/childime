@@ -65,7 +65,7 @@ fun HomeScreen(
             ChatList(
                 entries = state.predict.prediction,
                 onItemClick = { prediction ->
-                    navController.navigate("predictionDetails/${prediction}")
+                    navController.navigate("details/${prediction}")
                 }
             )
         }
@@ -88,11 +88,10 @@ fun NormalChatEntryView(
     modifier: Modifier = Modifier.padding(20.dp),
     onClick: () -> Unit = {}
 ) {
-    // Примитивный мэппинг "опасности" на иконку и цвет
     val (icon, bgColor) = when {
-        score >= 0.75f -> Icons.Filled.Warning to Color(0xFFB00020)   // очень опасно
-        score >= 0.4f -> Icons.Filled.Info to Color(0xFFFFA000)       // средний риск
-        else -> Icons.Filled.CheckCircle to Color(0xFF2E7D32)         // низкий риск
+        score >= 0.75f -> Icons.Filled.Warning to Color(0xFFB00020)
+        score >= 0.4f -> Icons.Filled.Info to Color(0xFFFFA000)
+        else -> Icons.Filled.CheckCircle to Color(0xFF2E7D32)
     }
 
     Row(
