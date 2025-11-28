@@ -58,6 +58,7 @@ data class ChatMessage(
     val id: String,
     val author: String,
     val text: String,
+    val riskLevel: RiskLevel,
     val timestamp: String,
     val isFromChild: Boolean
 )
@@ -81,14 +82,23 @@ fun DetailsScreen(
         }
 
         is DetailsViewState.OK -> {
-          Text("OK")
-          val prediction = viewModel.findPrediction(id)
-          val flaggedMessage = ChatMessage(id, "", prediction.ru, "", true)
-          val surroundMessages: List<ChatMessage> = viewModel.surroundMessages(3).messages.map { it ->
-            ChatMessage(it.id, "", it.content, "", true)
-          }
-          val allMessages = listOf<ChatMessage>(flaggedMessage) + surroundMessages
-          BullyingContextScreen("dummyId", allMessages, RiskLevel.MEDIUM, 89, {}, {}, {}, {})
+            Text("OK")
+            val prediction = viewModel.findPrediction(id)
+            val riskScore = prediction.score * 100
+            var riskLevel = RiskLevel.HIGH
+            if (riskScore < 50) {
+                riskLevel = RiskLevel.LOW
+            }
+            if (riskScore > 50 && riskScore < 74) {
+                riskLevel = RiskLevel.MEDIUM
+            }
+            val flaggedMessage = ChatMessage(id, "", prediction.ru, riskLevel, "", true)
+            val surroundMessages: List<ChatMessage> =
+                viewModel.surroundMessages(3).messages.map { it ->
+                    ChatMessage(it.id, "", it.content, riskLevel, "", true)
+                }
+            val allMessages = surroundMessages + listOf<ChatMessage>(flaggedMessage)
+            BullyingContextScreen(id, allMessages, riskLevel, riskScore.toInt(), {}, {}, {}, {})
         }
 
         is DetailsViewState.Error -> {
@@ -112,7 +122,7 @@ fun BullyingContextScreen(
     onShowMoreContext: () -> Unit
 ) {
     val flaggedIndex = remember(messages, flaggedMessageId) {
-      messages.indexOfFirst { it.id == flaggedMessageId }
+        messages.indexOfFirst { it.id == flaggedMessageId }
     }
 
     Scaffold(topBar = {
@@ -143,7 +153,7 @@ fun BullyingContextScreen(
             if (flaggedIndex == -1) {
                 Text(
                     text = "Не удалось найти выделенное сообщение в контексте.",
-                    style = MaterialTheme.typography.bodyMedium, 
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error.copy(alpha = 0.75f)
                 )
             } else {
@@ -351,10 +361,16 @@ fun FlaggedMessageRow(
 
                 Spacer(Modifier.weight(1f))
 
+                val (label, color) = when (message.riskLevel) {
+                    RiskLevel.LOW -> "Низкий риск" to Color(0xFF3C8C4F)
+                    RiskLevel.MEDIUM -> "Средний риск" to Color(0xFFD68F2B)
+                    RiskLevel.HIGH -> "Высокий риск" to MaterialTheme.colorScheme.error
+                }
+
                 Icon(
                     imageVector = Icons.Filled.Warning,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.error
+                    tint = color
                 )
             }
 

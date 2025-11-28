@@ -26,8 +26,9 @@ class DetailsViewModel constructor(private val aiRepository: AiRepository, val c
     }
 
     fun surroundMessages(count: Int): Messages {
-      return aiRepository.surroundMessages(count)
+        return aiRepository.surroundMessages(count)
     }
+
     override fun bindActions() {
         bindAction(DetailsAction.InitDetailsAction::class, InitialUseCase())
     }
