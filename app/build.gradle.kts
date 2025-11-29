@@ -65,6 +65,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation("androidx.compose.foundation:foundation-layout:1.7.0")
 
     // Optional Material3 (already covered in BOM, but explicit fallback)
     implementation(libs.androidx.compose.material3)

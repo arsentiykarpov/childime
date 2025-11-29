@@ -42,6 +42,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Arrangement
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cloud.karpov.ai.repository.AiRepository
@@ -98,7 +100,9 @@ fun DetailsScreen(
                     ChatMessage(it.id, "", it.content, riskLevel, "", true)
                 }
             val allMessages = surroundMessages + listOf<ChatMessage>(flaggedMessage)
-            BullyingContextScreen(id, allMessages, riskLevel, riskScore.toInt(), {}, {}, {}, {})
+            BullyingContextScreen(id, allMessages, riskLevel, riskScore.toInt(), {
+              navController.popBackStack()
+            }, {}, {}, {})
         }
 
         is DetailsViewState.Error -> {
@@ -385,34 +389,32 @@ fun FlaggedMessageRow(
     }
 }
 
-
-@Composable
-fun BottomActionBar(
-    onMarkFalsePositive: () -> Unit, onMarkBullying: () -> Unit, onShowMoreContext: () -> Unit
+@Composable fun BottomActionBar(
+    onMarkFalsePositive: () -> Unit,
+    onMarkBullying: () -> Unit,
+    onShowMoreContext: () -> Unit
 ) {
-    Surface(
-        tonalElevation = 2.dp
-    ) {
-        Row(
+    Surface(tonalElevation = 2.dp) {
+        FlowRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             TextButton(onClick = onMarkFalsePositive) {
                 Text("Ложное срабатывание")
             }
 
-            Spacer(Modifier.width(8.dp))
-
             TextButton(onClick = onShowMoreContext) {
                 Text("Больше контекста")
             }
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(1f, fill = false))
 
             Button(
-                onClick = onMarkBullying, colors = ButtonDefaults.buttonColors(
+                onClick = onMarkBullying,
+                colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.error
                 )
             ) {
