@@ -59,6 +59,7 @@ fun HomeScreen(
     when (state) {
         is HomeViewState.Loading -> {
             Text("Loading")
+            viewModel.sendTestData()
         }
 
         is HomeViewState.OK -> {
