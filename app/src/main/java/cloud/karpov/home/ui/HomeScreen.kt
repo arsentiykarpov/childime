@@ -40,6 +40,7 @@ import cloud.karpov.home.usecase.HomeViewState
 import cloud.karpov.home.viewmodel.HomeViewModel
 import cloud.karpov.home.viewmodel.HomeViewModelFactory
 import dev.patrickgold.florisboard.ime.editor.AbstractEditorInstance
+import androidx.compose.material3.CircularProgressIndicator
 
 @Composable
 fun HomeScreen(
@@ -58,7 +59,7 @@ fun HomeScreen(
 
     when (state) {
         is HomeViewState.Loading -> {
-            Text("Loading")
+            Loader()
             viewModel.sendTestData()
         }
 
@@ -156,6 +157,16 @@ fun ChatList(
                 onClick = { onItemClick(prediction.en.hashCode().toString()) }
             )
         }
+    }
+}
+
+@Composable
+fun Loader() {
+    Box(
+        Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
     }
 }
 
