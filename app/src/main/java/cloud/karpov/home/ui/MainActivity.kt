@@ -19,9 +19,16 @@ class MainActivity : AppCompatActivity() {
     setContent {
         AppNavigation()
     }
+    openAccessibilitySettings()
     //startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
     //val imeManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     //imeManager.showInputMethodPicker()
   }
+    private fun openAccessibilitySettings() {
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        this.startActivity(intent)
+    }
 
 }
