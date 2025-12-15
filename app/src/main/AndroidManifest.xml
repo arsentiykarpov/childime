@@ -50,7 +50,7 @@
 
         <!--AccessibilityService-->
         <service
-            android:name=".InputAccessibilityListenerService"
+            android:name=".services.InputAccessibilityListenerService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:exported="true">
 

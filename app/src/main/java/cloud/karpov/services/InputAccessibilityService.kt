@@ -9,6 +9,15 @@ class InputAccessibilityListenerService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event == null) return
 
+         Log.d("AccService", """
+              TYPE=${AccessibilityEvent.eventTypeToString(event.eventType)}
+              PKG=${event.packageName}
+              CLASS=${event.className}
+              TEXT=${event.text}
+              DESC=${event.contentDescription}
+              SOURCE=${event.source?.viewIdResourceName}
+          """.trimIndent())
+
         when (event.eventType) {
 
             AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED -> {
